@@ -208,7 +208,8 @@ void StructureClass::drawSelectionBox()
 		}
 	}
 
-	drawhline(screen, dest.x, dest.y-2, dest.x + ((int)((getHealth()/(double)getMaxHealth())*(BLOCKSIZE*structureSize.x - 1))), getHealthColor());
+	// Draws two lines right below the upper part of the selection box.
+	drawrect(screen, dest.x+1, dest.y+1, dest.x + ((int)((getHealth()/(double)getMaxHealth())*(BLOCKSIZE*structureSize.x - 2))), dest.y+2, getHealthColor());
 }
 
 /**
