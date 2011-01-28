@@ -1,0 +1,103 @@
+This file provides information on how to build and install Dune Legacy.
+
+Prerequirements
+---------------
+
+- gcc or any other standard compliant C++ compiler
+- autotools
+- SDL 1.2
+- SDL-mixer
+
+
+Building
+--------
+
+Dune Legacy can read the needed data from different locations. If you want 
+to keep everything in one directory you should use the first method. You also
+may decide to install Dune Legacy on your system. The use the second method.
+
+Method 1: Data read from local directory
+----------------------------------------
+Extract the Dune Legacy source code and run at the top level directory
+the following command:
+
+./buildlocal.sh
+
+This will configure and build Dune Legacy and you will find afterwards
+a "dunelegacy" binary in the top level directory. The data is read from
+the data subdirectory. There you shoud copy all the PAK-files from Dune 2
+
+Method 2: Install Dune Legacy on your system
+--------------------------------------------
+Extract the Dune Legacy source code and run at the top level directory
+the following commands:
+
+autoreconf --install
+./configure
+make
+make install
+
+You may decide to change configure's default prefix to something else, e.g.
+./configure --prefix=/usr
+
+
+Packaging/Distributions
+------------
+
+Source:
+To package the source code go to the build directory and type
+
+make dist-bzip2
+
+This creates dunelegacy-?.tar.bz2. You might want to add a "src" to the name to get dunelegacy-?-src.tar.bz2
+
+
+Debian/Ubuntu:
+Make sure you have the following packages installed: build-essential, debhelper, autoconf, libsdl1.2-dev and libsdl-mixer1.2-dev
+Extract the source code from the bz2 file and change inside the source root directory (which contains configure). From there you run the following command:
+
+dpkg-buildpackage -rfakeroot
+
+You will get a dunelegacy_0.96-1_*.deb file one directory above.
+
+
+Fedora:
+You need the source tarball (see Packaging/Source in this file) and the following packages: rpmbuild, gcc, gcc-c++, libstdc++-devel, SDL-devel, SDL_mixer-devel. Then run the following command:
+
+rpmbuild -tb dunelegacy-?-src.tar.bz2
+
+Under ~/rpmbuild/RPMS/<arch> you will find the created rpm file.
+
+
+Gentoo:
+There is an ebuild available. Go to your local portage tree and create the directory games-strategy/dunelegacy. Put the ebuild there and run
+
+ebuild dunelegacy-?.ebuild digest
+emerge dunelegacy
+
+
+Mac OS X:
+Open the XCode-Project from IDE/xCode/Dune Legacy.xcodeproj and build Dune Legacy. The resulting bundle will be put under IDE/xCode/build/Release.
+Now go to the folder MacOSX and extract Dune Legacy.dmg.zip and then mount Dune Legacy.dmg. Put the compiled Dune Legacy bundle into the mounted dmg and unmount it afterwards.
+Zip the dmg again to save a lot of download bandwidth.
+
+
+Windows:
+Use Code::Blocks to build the exe which will be placed in the data directory. The following DLLs are needed to run dunelegacy.exe:
+libogg-0.dll
+libvorbis-0.dll
+libvorbisfile-3.dll
+SDL.dll
+SDL_mixer.dll
+smpeg.dll
+
+Copy them in the data directory. To create a installer you need NSIS. Compile dunelegacy.nsi with the NSIS compiler to create the installer.
+
+
+Running unit tests
+------------------
+
+To run the unit tests from the tests directory simply run the following script
+
+./runUnitTests.sh
+

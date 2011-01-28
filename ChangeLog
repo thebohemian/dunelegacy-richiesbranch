@@ -1,0 +1,16 @@
+
+version 0.96.1
+	* Custom maps implemented (see Dune II Format Specification for details of the map format)
+	* AI fixed (but still dumb)
+	* Play with AI in one team
+	* Fremen, Sardaukar and Mercenary playable (but needs better testing)
+	* Only one palace per house possible
+	* Colors of ingame GUI elements customized for each house
+	* New option screen
+	* I18N support (only English and German atm)
+	* Savegames are sorted by date
+	* Wall-Bug fixed: Walls not drawn correctly after loading a game
+	* Linux: Save configuration files to $XDG_CONFIG_HOME/dunelegacy if set; otherwise ~/.config/dunelegacy is used
+	* Mac OS X: Save configuration files to ~/Library/Application Support/Dune Legacy instead of ~/.config/dunelegacy
+	* Calculate md5sum of all PAK-Files at startup and write them to the log file (should ease debugging)
+	* Various smaller bugfixes
